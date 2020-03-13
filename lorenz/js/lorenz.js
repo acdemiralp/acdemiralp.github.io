@@ -1,4 +1,4 @@
-var system    = new lorenz_system(10.0, 8.0/3.0, 28.0)
+var system    = new lorenz_system(10.0, 2.66, 28.0)
 var positions = [];
 var colors    = [];
 var position  = [32, 32, 32]
@@ -12,7 +12,7 @@ function on_update    (app) {
   var geometry = new THREE.BufferGeometry   ();
   var material = new THREE.LineBasicMaterial({vertexColors: true});
   
-  rk4      = new runge_kutta_4(system, 0.001);
+  rk4      = new runge_kutta_4(system, 0.0001);
   position = rk4   .do_step (position)
   color    = system.evaluate(position).multiply_scalar(1.0 / system.evaluate(position).vector_length()).map(function(item) { return Math.abs(item); })
   positions.push(position[0], position[1], position[2]);
