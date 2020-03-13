@@ -12,7 +12,7 @@ function on_update    (app) {
   var geometry = new THREE.BufferGeometry   ();
   var material = new THREE.LineBasicMaterial({vertexColors: true});
   
-  rk4      = new runge_kutta_4(system, 0.0001);
+  rk4      = new runge_kutta_4(system, 0.1);
   position = rk4   .do_step (position)
   color    = system.evaluate(position).multiply_scalar(1.0 / system.evaluate(position).vector_length()).map(function(item) { return Math.abs(item); })
   positions.push(position[0], position[1], position[2]);
