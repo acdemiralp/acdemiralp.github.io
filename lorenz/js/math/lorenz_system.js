@@ -1,6 +1,6 @@
 class lorenz_system
 {
-  constructor(sigma = 10.0, rho = 8.0/3.0, beta = 28.0) 
+  constructor(sigma = 10.0, rho = 28.0, beta = 8.0/3.0) 
   {
     this.sigma = sigma;
     this.rho   = rho  ;
