@@ -1,7 +1,7 @@
 var system    = new lorenz_system(10.0, 28.0, 8.0/3.0)
 var positions = [];
 var colors    = [];
-var position  = [32, 32, 32]
+var position  = [8, 8, 8]
 var instance  ;
 
 function on_initialize(app) {
