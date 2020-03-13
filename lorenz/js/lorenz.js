@@ -1,4 +1,4 @@
-var system    = new lorenz_system(6.5, 35, 1.1)
+var system    = new lorenz_system()
 var positions = [];
 var colors    = [];
 var position  = [32, 32, 32]
