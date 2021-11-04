@@ -11,8 +11,7 @@ class Application
     this.controls = new TrackballControls(this.camera, this.renderer.domElement);
     this.renderer.setSize                (window.innerWidth, window.innerHeight);
     this.renderer.setPixelRatio          (window.devicePixelRatio);
-    this.camera  .position.set           (0, 0, -10);
-    this.camera  .lookAt                 (0, 0, 0);
+    this.camera  .position.set           (0, 0, -20);
     this.controls.update                 ();
 
     window.addEventListener('resize', function() 
@@ -23,7 +22,6 @@ class Application
       this.controls.handleResize();
     }, false);
     
-
     on_initialize(this);
   }
 
