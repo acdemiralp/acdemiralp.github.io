@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>D3.js Example</title>
+  <style>
+    html, body 
+    {
+      height          : 100%   ;
+      margin          : 0      ;
+      background-color: #111111;
+      color           : #AAAAAA;
+    }
+    #wrapper
+    {
+      min-height      : 100%;
+    }
+  </style>
+</head>
+<body>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <div id="wrapper">
+    <!-- Inject JS here. -->
+  </div>
+  <script>
+    var margin = {top: 30, right: 30, bottom: 70, left: 60},
+        width  = document.body.clientWidth  - margin.left - margin.right ,
+        height = document.body.clientHeight - margin.top  - margin.bottom - 10;
+
+    var svg = d3
+      .select       ("#wrapper")
+      .append       ("svg")
+      .attr         ("width"    , width  + margin.left + margin.right )
+      .attr         ("height"   , height + margin.top  + margin.bottom)
+      .append       ("g")
+      .attr         ("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/7_OneCatOneNum_header.csv").then(function(data) { 
+      var x = d3
+        .scaleBand  ()
+        .range      ([0, width])
+        .domain     (data.map(function(d) { return d.Country; }))
+        .padding    (0.2);
+      svg
+        .append     ("g")
+        .attr       ("transform", "translate(0," + height + ")")
+        .call       (d3.axisBottom(x))
+        .selectAll  ("text")
+        .attr       ("transform", "translate(-10,0)rotate(-45)")
+        .style      ("text-anchor", "end");
+    
+      var y = d3
+        .scaleLinear()
+        .domain     ([0, 13000])
+        .range      ([ height, 0]);
+      svg
+        .append     ("g")
+        .call       (d3.axisLeft(y));
+    
+      svg
+        .selectAll  ("mybar")
+        .data       (data)
+        .enter      ()
+        .append     ("rect")
+        .attr       ("x"     , function(d) { return x(d.Country); })
+        .attr       ("y"     , function(d) { return y(d.Value  ); })
+        .attr       ("width" , x.bandwidth())
+        .attr       ("height", function(d) { return height - y(d.Value); })
+        .attr       ("fill"  , "#69b3a2")
+    })
+  </script>
+</body>
+</html>
